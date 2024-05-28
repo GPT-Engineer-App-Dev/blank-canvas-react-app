@@ -1,18 +1,28 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
-
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+import { Box, Container, Flex, Text, VStack, Link } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
+    <Container maxW="container.xl">
+      <Flex as="nav" bg="gray.100" p={4} mb={8} justifyContent="space-between" alignItems="center">
+        <Text fontSize="2xl" fontWeight="bold">
+          Blank Canvas
+        </Text>
+        <Box>
+          <Link as={RouterLink} to="/" p={2} fontSize="lg">
+            Home
+          </Link>
+          <Link as={RouterLink} to="/about" p={2} fontSize="lg">
+            About
+          </Link>
+        </Box>
+      </Flex>
+      <Box as="main">
+        <VStack spacing={4}>
+          <Text fontSize="2xl">Welcome to Your Blank Canvas</Text>
+          <Text>Start building your amazing application here.</Text>
+        </VStack>
+      </Box>
     </Container>
   );
 };
