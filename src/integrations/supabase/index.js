@@ -19,9 +19,6 @@ const fromSupabase = async (query) => {
 
 /* supabase integration types
 
-// EXAMPLE TYPES SECTION
-// DO NOT USE TYPESCRIPT AND SHOULD ALWAYS BE COMMENTED OUT
-
 Foo // table: foos
     id: number
     title: string
@@ -29,17 +26,15 @@ Foo // table: foos
 
 Bar // table: bars
     id: number
-    foo_id: number // foreign key to Foo
-	
+    foo_id: number // foreign key to Foo.id
+
 */
 
 // hooks
 
-// EXAMPLE HOOKS SECTION
-
 export const useFoo = ()=> useQuery({
     queryKey: ['foo'],
-    queryFn: fromSupabase(supabase.from('foo').select('*,bars(*)')),
+    queryFn: () => fromSupabase(supabase.from('foo').select('*,bars(*)')),
 })
 export const useAddFoo = () => {
     const queryClient = useQueryClient();

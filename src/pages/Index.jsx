@@ -1,7 +1,18 @@
 import { Box, Container, Flex, Text, VStack, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import { useFoo } from "../integrations/supabase/index.js";
 
 const Index = () => {
+  const { data, error, isLoading } = useFoo();
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
+  }
+
   return (
     <Container maxW="container.xl">
       <Flex as="nav" bg="gray.100" p={4} mb={8} justifyContent="space-between" alignItems="center">
@@ -21,6 +32,14 @@ const Index = () => {
         <VStack spacing={4}>
           <Text fontSize="2xl">Welcome to Your Blank Canvas</Text>
           <Text>Start building your amazing application here.</Text>
+        {data && data.map((foo) => (
+            <Box key={foo.id} p={4} bg="gray.50" borderRadius="md" w="100%">
+              <Text fontSize="lg">{foo.title}</Text>
+              {foo.bars && foo.bars.map((bar) => (
+                <Text key={bar.id} fontSize="sm" color="gray.500">{bar.id}</Text>
+              ))}
+            </Box>
+          ))}
         </VStack>
       </Box>
     </Container>
